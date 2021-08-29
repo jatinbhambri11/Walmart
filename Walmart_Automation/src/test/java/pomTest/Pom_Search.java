@@ -12,6 +12,8 @@ import org.openqa.selenium.support.PageFactory;
 import basePackage.Base_walmart;
 
 public class Pom_Search extends Base_walmart{
+	
+	testutils utils=new testutils();
 	@FindBy(css=".e1xoeh2i1")
 	WebElement Search_key;
 	
@@ -87,8 +89,7 @@ public class Pom_Search extends Base_walmart{
 		
 	}
 
-		
-	public void pagination() {
+		public void pagination() {
 		
 	
 		List<WebElement> page = driver.findElements(By.xpath("//div[@data-automation='product']"));
@@ -98,30 +99,37 @@ public class Pom_Search extends Base_walmart{
 		//WebElement prevButton= driver.findElement(By.xpath("//a[@data-automation='pagination-previous-button']"));
 
 		// checkif pagination link exists
-		if(page .size()>0)
+		if(page.size()>0)
 		{ 
 		System.out.println("pagination exists"); 
 
 		// click on pagination link 
 
-		for(int i=1; i <page.size(); i++)
+		for(WebElement p:page)
 		{ 
+			System.out.println(p.getText());
+			System.out.println("          ");
 			
-			page.get(i).click();
-		}
-
+					}
 		//Check if nextbutton is enable or not.
-
+		
+		utils.ScrollDown();
 		   if(NextButton.isEnabled())
 		{
 
 		    NextButton.click();
-		    
+		    List<WebElement> page2 = driver.findElements(By.xpath("//div[@data-automation='product']"));
+		    for(WebElement p2:page2)
+		    {
+		    	System.out.println(p2.getText());
+				System.out.println("          ");
+		    	
+		    }
+		    System.out.println("Products are duplicate" + page2.containsAll(page));
 		}
-		else { 
-		System.out.println("pagination not exists"); 
-		} 
-		}}
+		
+		   
+			}}
 
 		
 		
